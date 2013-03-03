@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/yui3-cssbuttons.css">
+		<link rel="stylesheet" type="text/css" href="css/gallery-introtour-ui.css">
+	</head>
+	<body>
+        <div id="hello1">Start here.</div>
+        <br><br><br><br><br><br><br><br><br><br>
+        <div id="hello2">The go here.</div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div id="hello3">This is also useful.</div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div style="margin-left:600px;" id="hello4">Save changes</div>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+		<script src="jquery/gallery-introtour-ui-jq.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			var tour_cards = [{'title':'Welcome','position':'pagecenter','content':'Welcome to this feature tour'},
+                {'title':'Get Started','content':'This tells you what to do to get started.','divfocus':'hello1','position':'right','width':'100'},
+                {'title':'Go here next','content':'Next, you should probably try this out.','divfocus':'hello2','position':'top','height':'125'},
+                {'title':'Try this!','content':'This helps you get more information.','divfocus':'hello3','position':'bottom','height':'50'},
+                {'title':'Important!','content':'Finally click here to save changes.','divfocus':'hello4','position':'left','width':'50'},
+                {'title':'That\'s it! You\'re good to go!','position':'pagecenter'}];
+			$().introTour(tour_cards);	
+			});
+			
+		</script>
+	</body>
+</html>
