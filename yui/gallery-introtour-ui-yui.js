@@ -8,18 +8,12 @@ Usage:
 							{'title':'Click here to start','divfocus':'#clickhere','position':'right','width':'30'},
 							{'title':'Next click here to cont..','divfocus':'#continue','position':'top',height:'20'},
 							{'title':'That's it!','position':'pagecenter'}];
-		//OPTIONAL: You can style your card's button colors, card border color, title color, button text color, content color.
-		//These are the default values
-		var tour_card_style = {'button':'#61399d','buttontext':'#000','title':'#fff','content':'#fff','cardborder':'#61399d'};
-		var config = {cards:tour_cards,cardstyle:tour_card_style};
-		Y.introtour.init(config);
-		//Start the tour.
-		Y.introtour.start();
+		Y.Introtour.init(tour_cards);
 	});
 
 IMPORTANT:
 1. The div ID you pass cannot be hidden at the time of calling the init function.
-2. The div ID you pass needs to have a parent which has position:relative.
+2. The div ID you pass needs to have an ancestor which has position:relative.
 */
 /*******************************************/
 YUI.add('gallery-introtour-ui', function(Y) {
