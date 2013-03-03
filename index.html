@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Introtour-ui by nbprithv</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Introtour-ui</h1>
+        <p>A JS plugin to add a feature walkthrough on your web page.</p>
+
+        <p class="view"><a href="https://github.com/nbprithv/introtour-ui">View the Project on GitHub <small>nbprithv/introtour-ui</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/nbprithv/introtour-ui/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/nbprithv/introtour-ui/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/nbprithv/introtour-ui">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>introtour-ui</h1>
+
+<p>A JS plugin to add a feature walkthrough on your web page.</p>
+
+<p>Use the configuration below, to quickly set up a step by step walkthrough of features on your page. 
+You can position the walkthrough callouts to appear on the right,left,top or bottom of the element you are describing. 
+For the left/right position, give the width of the element. 
+This positions the callout exactly the way you want it. 
+Similarily, give the height of the element when using the top/bottom positioning of the callout. 
+Future features, include a complete customization of the look &amp; feel of the callouts.</p>
+
+<h2>jQuery Plugin usage</h2>
+
+<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"http://code.jquery.com/jquery-1.9.1.min.js"</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"jquery/gallery-introtour-ui-jq.js"</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text/javascript"</span><span class="o">&gt;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+<span class="kd">var</span> <span class="nx">tour_cards</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Welcome'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'pagecenter'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'Welcome to this feature tour'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Get Started'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'This tells you what to do to get started.'</span><span class="p">,</span><span class="s1">'divfocus'</span><span class="o">:</span><span class="s1">'hello1'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'right'</span><span class="p">,</span><span class="s1">'width'</span><span class="o">:</span><span class="s1">'100'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Go here next'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'Next, you should probably try this out.'</span><span class="p">,</span><span class="s1">'divfocus'</span><span class="o">:</span><span class="s1">'hello2'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'top'</span><span class="p">,</span><span class="s1">'height'</span><span class="o">:</span><span class="s1">'125'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Try this!'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'This helps you get more information.'</span><span class="p">,</span><span class="s1">'divfocus'</span><span class="o">:</span><span class="s1">'hello3'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'bottom'</span><span class="p">,</span><span class="s1">'height'</span><span class="o">:</span><span class="s1">'50'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Important!'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'Finally click here to save changes.'</span><span class="p">,</span><span class="s1">'divfocus'</span><span class="o">:</span><span class="s1">'hello4'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'left'</span><span class="p">,</span><span class="s1">'width'</span><span class="o">:</span><span class="s1">'50'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'That\'s it! You\'re good to go!'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'pagecenter'</span><span class="p">}];</span>
+<span class="nx">$</span><span class="p">().</span><span class="nx">introTour</span><span class="p">(</span><span class="nx">tour_cards</span><span class="p">);</span>  
+<span class="p">});</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</pre></div>
+
+<h2>YUI3 Plugin usage</h2>
+
+<div class="highlight"><pre><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"http://yui.yahooapis.com/3.8.1/build/yui/yui-min.js"</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"yui/gallery-introtour-ui-yui.js"</span><span class="o">&gt;&lt;</span><span class="sr">/script&gt; /</span><span class="o">/</span><span class="nx">Or</span> <span class="nx">use</span> <span class="nx">directly</span> <span class="nx">from</span> <span class="nx">CDN</span><span class="p">.</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text/javascript"</span><span class="o">&gt;</span>
+<span class="nx">YUI</span><span class="p">().</span><span class="nx">use</span><span class="p">(</span><span class="s1">'gallery-introtour-ui'</span><span class="p">,</span><span class="s1">'test'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">tour_cards</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Welcome'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'pagecenter'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'Welcome to this feature tour'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Get Started'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'This tells you what to do to get started.'</span><span class="p">,</span><span class="s1">'divfocus'</span><span class="o">:</span><span class="s1">'hello1'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'right'</span><span class="p">,</span><span class="s1">'width'</span><span class="o">:</span><span class="s1">'100'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Go here next'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'Next, you should probably try this out.'</span><span class="p">,</span><span class="s1">'divfocus'</span><span class="o">:</span><span class="s1">'hello2'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'top'</span><span class="p">,</span><span class="s1">'height'</span><span class="o">:</span><span class="s1">'125'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Try this!'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'This helps you get more information.'</span><span class="p">,</span><span class="s1">'divfocus'</span><span class="o">:</span><span class="s1">'hello3'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'bottom'</span><span class="p">,</span><span class="s1">'height'</span><span class="o">:</span><span class="s1">'50'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'Important!'</span><span class="p">,</span><span class="s1">'content'</span><span class="o">:</span><span class="s1">'Finally click here to save changes.'</span><span class="p">,</span><span class="s1">'divfocus'</span><span class="o">:</span><span class="s1">'hello4'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'left'</span><span class="p">,</span><span class="s1">'width'</span><span class="o">:</span><span class="s1">'50'</span><span class="p">},</span>
+                <span class="p">{</span><span class="s1">'title'</span><span class="o">:</span><span class="s1">'That\'s it! You\'re good to go!'</span><span class="p">,</span><span class="s1">'position'</span><span class="o">:</span><span class="s1">'pagecenter'</span><span class="p">}];</span>
+    <span class="nx">Y</span><span class="p">.</span><span class="nx">Introtour</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">tour_cards</span><span class="p">);</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/nbprithv">nbprithv</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
