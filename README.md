@@ -12,7 +12,7 @@ This positions the callout exactly the way you want it.
 Similarily, give the height of the element when using the top/bottom positioning of the callout. 
 Future features, include a complete customization of the look & feel of the callouts.
 
-Add the css. All this should be available in CDN soon.
+Add the css. The CSS should be available in CDN soon. Will update the link here once it is.
 ```html
 <link rel="stylesheet" type="text/css" href="css/gallery-introtour-ui-min.css">
 ```
