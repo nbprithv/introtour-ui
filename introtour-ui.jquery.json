@@ -1,0 +1,38 @@
+{
+    "name": "introtour-ui",
+    "title": "jQuery feature walkthrough",
+    "description": "jQuery plugin for adding a feature walkthrough to your web pages.",
+    "keywords": [
+        "feature",
+        "walkthrough",
+		"userinteraction",
+		"ui",
+		"introduction",
+		"tour"
+    ],
+    "version": "1.0.1",
+    "author": {
+        "name": "Niranjan B Prithviraj",
+        "url": "https://github.com/nbprithv"
+    },
+    "maintainers": [
+        {
+            "name": "Niranjan B Prithviraj",
+            "email": "niranjan.prithviraj@gmail.com",
+            "url": "http://niranjanprithviraj.com"
+        }
+    ],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/jquery/jquery-color/blob/2.1.2/MIT-LICENSE.txt"
+        }
+    ],
+    "bugs": "https://github.com/nbprithv/introtour-ui/issues",
+    "homepage": "http://nbprithv.github.com/introtour-ui/",
+    "docs": "https://github.com/nbprithv/introtour-ui/blob/master/README.md",
+    "download": "https://github.com/nbprithv/introtour-ui/tree/master/jquery",
+    "dependencies": {
+        "jquery": ">=1.5"
+    }
+}
