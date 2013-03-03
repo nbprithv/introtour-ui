@@ -1,7 +1,9 @@
-introtour-ui
+Feature Walkthrough JS plugin
 ============
 
 A JS plugin to add a feature walkthrough on your web page.
+
+Checkout a demo here. http://nbprithv.github.com/introtour-ui
 
 Use the configuration below, to quickly set up a step by step walkthrough of features on your page. 
 You can position the walkthrough callouts to appear on the right,left,top or bottom of the element you are describing. 
@@ -9,6 +11,11 @@ For the left/right position, give the width of the element.
 This positions the callout exactly the way you want it. 
 Similarily, give the height of the element when using the top/bottom positioning of the callout. 
 Future features, include a complete customization of the look & feel of the callouts.
+
+Add the css. All this should be available in CDN soon.
+```html
+<link rel="stylesheet" type="text/css" href="css/gallery-introtour-ui-min.css">
+```
 
 jQuery Plugin usage
 -------------------
