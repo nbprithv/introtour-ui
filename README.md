@@ -12,6 +12,13 @@ This positions the callout exactly the way you want it.
 Similarily, give the height of the element when using the top/bottom positioning of the callout. 
 Future features, include a complete customization of the look & feel of the callouts.
 
+Important
+---------
+- The div ID you pass cannot be hidden at the time of calling the init function.
+- The div ID you pass needs to have an ancestor which has position:relative.
+
+CSS
+----
 Add the css. The CSS should be available in CDN soon. Will update the link here once it is.
 ```html
 <link rel="stylesheet" type="text/css" href="css/gallery-introtour-ui-min.css">
