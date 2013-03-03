@@ -13,7 +13,8 @@ Future features, include a complete customization of the look & feel of the call
 jQuery Plugin usage
 -------------------
 
-```<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+```javascript
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="jquery/gallery-introtour-ui-jq.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -28,10 +29,12 @@ $().introTour(tour_cards);
 </script>
 ```
 
+
 YUI3 Plugin usage
 -----------------
 
-```<script src="http://yui.yahooapis.com/3.8.1/build/yui/yui-min.js"></script>
+```javascript
+<script src="http://yui.yahooapis.com/3.8.1/build/yui/yui-min.js"></script>
 <script src="yui/gallery-introtour-ui-yui.js"></script> //Or use directly from CDN.
 <script type="text/javascript">
 YUI().use('gallery-introtour-ui','test', function (Y) {
