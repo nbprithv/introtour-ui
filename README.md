@@ -1,4 +1,4 @@
-introtour-ui
+Feature Walkthrough JS plugin
 ============
 
 A JS plugin to add a feature walkthrough on your web page.
