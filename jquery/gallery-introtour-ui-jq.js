@@ -1,25 +1,16 @@
 /*******************************************/
 /*
-YUI Gallery Intro Tour module
-Set up step by step intro tours on your page.
+jQuery Feature Walkthrough plugin
+Set up step by step feature walkthrough on your page.
 Usage:
-	YUI().use("gallery-introtour-ui",function(Y){
 		var tour_cards = [{'title':'Welcome','position':'pagecenter','content':},
-							{'title':'Click here to start','divfocus':'#clickhere','position':'right','width':'30'},
-							{'title':'Next click here to cont..','divfocus':'#continue','position':'top',height:'20'},
+							{'title':'Click here to start','target':'#clickhere','position':'right','width':'30'},
+							{'title':'Next click here to cont..','target':'#continue','position':'top',height:'20'},
 							{'title':'That's it!','position':'pagecenter'}];
-		//OPTIONAL: You can style your card's button colors, card border color, title color, button text color, content color.
-		//These are the default values
-		var tour_card_style = {'button':'#61399d','buttontext':'#000','title':'#fff','content':'#fff','cardborder':'#61399d'};
-		var config = {cards:tour_cards,cardstyle:tour_card_style};
-		Y.introtour.init(config);
-		//Start the tour.
-		Y.introtour.start();
-	});
-
+		$().introTour(tour_cards); 
 IMPORTANT:
 1. The div ID you pass cannot be hidden at the time of calling the init function.
-2. The div ID you pass needs to have a parent which has position:relative.
+2. The div ID you pass needs to have an ancestor which has position:relative.
 */
 /*******************************************/
 (function($){
@@ -74,7 +65,7 @@ IMPORTANT:
 							"<div class='yui-galleryintrotourui-card-content'>"+ci.content+"</div>"+
 						"</div>"+
 						"<div class='yui-galleryintrotourui-card-nav'>"+
-							"<div data-seqid='"+seqid+"' id='"+buttonid+"' class='yui-galleryintrotourui-card-next yui3-button notice'>"+button.content+"</div>"+
+							"<button data-seqid='"+seqid+"' id='"+buttonid+"' class='yui-galleryintrotourui-card-next yui3-button notice'>"+button.content+"</button>"+
 						"</div>"+
 					"</div>";
 
@@ -143,7 +134,7 @@ IMPORTANT:
 		generateSlideDom("60px","50%",cardinfo[0],'galleryintrotourui-card-welcome','welcome',0);
 		for(var i=1;i<cardinfo.length;i++){
 			var ci = cardinfo[i],
-			elem = document.getElementById(ci.divfocus),
+			elem = document.getElementById(ci.target),
 			pos;
 			if(elem){
 				pos = findpos(elem),
@@ -186,7 +177,14 @@ IMPORTANT:
 			}
 		});
 		$(".yui-galleryintrotourui-card-closebutton").click(function(){
+            window.scrollTo(0,0);
 			$(".yui-galleryintrotourui-card").css("display","none");
+		});
+		$(document).keyup(function(e) {
+		  if(e.keyCode == 27){
+				window.scrollTo(0,0);
+				$(".yui-galleryintrotourui-card").css("display","none");
+			}
 		});
 	};
 })(jQuery);
