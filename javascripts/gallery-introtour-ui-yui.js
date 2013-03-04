@@ -18,7 +18,8 @@ IMPORTANT:
 /*******************************************/
 YUI.add('gallery-introtour-ui', function(Y) {
 	Y.namespace('Introtour');
-	var findpos = function (obj){
+	var privateVars={},
+	findpos = function (obj){
 		var curleft =0,
 		curtop = 0;
 			if (obj.offsetParent) {
@@ -51,13 +52,13 @@ YUI.add('gallery-introtour-ui', function(Y) {
 		}
 		return cardstyle;
 	},
-	slideTemplate = function(ci,button,seqid){
+	slideTemplate = function(ci,button,seqid,index){
 		var buttonid = button.buttonid,
 		html = "",
 		arrowclass = "";
 		if(!ci.title){ci.title="";}
 		if(!ci.content){ci.content="";}
-		if(seqid > 0){buttonid = buttonid+seqid;}
+		if(index > 0){buttonid = buttonid+index;}
 		if(ci.position === "right"){arrowclass="right";}
 		else if(ci.position === "left"){arrowclass="left";}
 		else if(ci.position === "top"){arrowclass="top";}
@@ -75,13 +76,13 @@ YUI.add('gallery-introtour-ui', function(Y) {
 					"</div>";
 		return html;
 	},
-	generateSlideDom = function(toppos,leftpos,ci,id,type,seqid){
+	generateSlideDom = function(toppos,leftpos,ci,id,type,seqid,index){
 		var button = {},
 		html;
 		if(!type){button = ATTRS.buttonnav;}
 		else if(type === "welcome"){button=ATTRS.buttonwelcome;seqid="welcome";}
 		else if(type === "end"){button=ATTRS.buttontourend;seqid="end";}
-		html = slideTemplate(ci,button,seqid),
+		html = slideTemplate(ci,button,seqid,index),
 		node = new Y.Node(document.createElement('div'));
 		node.addClass('yui-galleryintrotourui-card');
 		node.setAttribute('id',id);
@@ -132,14 +133,25 @@ YUI.add('gallery-introtour-ui', function(Y) {
 		pos[1] = toppos;
 		pos[0] = leftpos;
 		return pos;
+	},
+	closeIntro = function(){
+		document.activeElement.blur();
+		window.scrollTo(privateVars.hscroll,privateVars.vscroll);
+		Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
+		privateVars.prevActiveElement.focus();
 	};
 	Y.Introtour.init = function(cardinfo,cardstyle){
+		privateVars.hscroll = (document.all ? document.scrollLeft : window.pageXOffset),
+		privateVars.vscroll = (document.all ? document.scrollTop : window.pageYOffset);
+		privateVars.prevActiveElement = document.activeElement;
+
 		cardstyle = setcardstyle(cardstyle);
 		generateSlideDom("60px","50%",cardinfo[0],'galleryintrotourui-card-welcome','welcome',0);
 		for(var i=1;i<cardinfo.length;i++){
 			var ci = cardinfo[i],
 			elem = document.getElementById(ci.target),
-			pos;
+			pos,
+			index=i;
 			if(elem){
 				pos = findpos(elem),
 				id='galleryintrotourui-card-'+i;
@@ -147,28 +159,35 @@ YUI.add('gallery-introtour-ui', function(Y) {
 				pos[1] = pos[1]+"px";
 				pos[0] = pos[0]+"px";
 				if(i===cardinfo.length-2){i="end";}
-				generateSlideDom(pos[1],pos[0],ci,id,'',i);
+				generateSlideDom(pos[1],pos[0],ci,id,'',i,index);
 			}
 		}
 		generateSlideDom("60px","50%",cardinfo[cardinfo.length-1],'galleryintrotourui-card-endtour','end',0);
 		window.scrollTo(0,0);
 		Y.one('#galleryintrotourui-card-welcome').setStyle('display','block');
+		Y.one("#yui-galleryintrotourui-buttonwelcome-id").focus();
 		Y.on("click",function(){
 			var seqid = this.getAttribute("data-seqid"),
-			carddivid = "";
+			carddivid = "",
+			buttondivid = "";//"#yui-galleryintrotourui-buttonnav-"+seqid;
+			this.blur();
 			Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
 			if(seqid === "welcome"){
 				carddivid = "#galleryintrotourui-card-1";
+				buttondivid = "#yui-galleryintrotourui-buttonnav-1";
 			}else if(seqid === "end"){
 				carddivid = "#galleryintrotourui-card-endtour";
+				buttondivid = "#yui-galleryintrotourui-buttontourend-id";
 			}else{
 				seqid++;
 				carddivid = '#galleryintrotourui-card-'+seqid;
+				buttondivid = '#yui-galleryintrotourui-buttonnav-'+seqid;
 			}
 			if(this.getAttribute("id") === "yui-galleryintrotourui-buttontourend-id"){
 				Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
 			}else{
 				Y.one(carddivid).setStyle('display','block');
+				Y.one(buttondivid).focus();
 				if(seqid !== "end"){
 					var toppos = Y.one(carddivid).getStyle('top'),
 					leftpos = Y.one(carddivid).getStyle('left');
@@ -180,13 +199,7 @@ YUI.add('gallery-introtour-ui', function(Y) {
 				}
 			}
 		},".yui-galleryintrotourui-card-next");
-		Y.on("click",function(){
-			window.scrollTo(0,0);
-			Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
-		},".yui-galleryintrotourui-card-closebutton");
-		Y.one('body').on('key', function() {
-			window.scrollTo(0,0);
-			Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
-		},'esc');
+		Y.on("click",closeIntro,".yui-galleryintrotourui-card-closebutton");
+		Y.one('body').on('key',closeIntro,'esc');
 	};
-}, '0.1.1',{requires: ['node','event-key']});
+}, '0.1.1',{requires: ['node','event']});
