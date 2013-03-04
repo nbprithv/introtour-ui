@@ -1,6 +1,6 @@
 YUI().use('gallery-introtour-ui','test', function (Y) {
-	var tour_cards = [{'title':'Welcome','position':'pagecenter','content':'Welcome to Intro tour plugin.'},
-                {'title':'Get Started','content':'Use this plugin to create a walkthrough like this.','target':'readsummary','position':'right','width':'100'},
+	var tour_cards = [{'title':'Welcome','position':'pagecenter','content':'Welcome to this Feature Walkthrough.'},
+                {'title':'Get Started','content':'Create a walkthrough like this, with this plugin.','target':'readsummary','position':'right','width':'100'},
                 {'title':'jQuery plugin','content':'Use the jQuery plugin if you prefer.','target':'jquerypluginusage','position':'top','height':'125'},
                 {'title':'YUI3 plugin','content':'Or in YUI3. Whichever you like.','target':'yuipluginusage','position':'bottom','height':'50'},
                 {'title':'YUI3 gallery module','content':'Include it only if you want the source or use directly from CDN','target':'yui3code','position':'left','width':'50'},
