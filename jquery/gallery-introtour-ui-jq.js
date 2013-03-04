@@ -14,7 +14,8 @@ IMPORTANT:
 */
 /*******************************************/
 (function($){
-	var findpos = function (obj){
+	var privateVars={},
+	findpos = function (obj){
 		var curleft = curtop = 0;
 			if (obj.offsetParent) {
 				do {
@@ -46,13 +47,13 @@ IMPORTANT:
 		}
 		return cardstyle;
 	},
-	slideTemplate = function(ci,button,seqid){
+	slideTemplate = function(ci,button,seqid,index){
 		var buttonid = button.buttonid,
 		html = "",
 		arrowclass = "";
 		if(!ci.title){ci.title="";}
 		if(!ci.content){ci.content="";}
-		if(seqid > 0){buttonid = buttonid+seqid;}
+		if(index > 0){buttonid = buttonid+index;}
 		if(ci.position === "right"){arrowclass="right";}
 		else if(ci.position === "left"){arrowclass="left";}
 		else if(ci.position === "top"){arrowclass="top";}
@@ -71,13 +72,13 @@ IMPORTANT:
 
 		return html;
 	},
-	generateSlideDom = function(toppos,leftpos,ci,id,type,seqid){
+	generateSlideDom = function(toppos,leftpos,ci,id,type,seqid,index){
 		var button = {},
 		html;
 		if(!type){button = ATTRS.buttonnav;}
 		else if(type === "welcome"){button=ATTRS.buttonwelcome;seqid="welcome";}
 		else if(type === "end"){button=ATTRS.buttontourend;seqid="end";}
-		html = slideTemplate(ci,button,seqid),
+		html = slideTemplate(ci,button,seqid,index),
 		node = $('<div></div>');
 		node.addClass('yui-galleryintrotourui-card');
 		node.attr('id',id);
@@ -128,14 +129,24 @@ IMPORTANT:
 		pos[1] = toppos;
 		pos[0] = leftpos;
 		return pos;
-	};
+	},
+	closeIntro = function(){
+        document.activeElement.blur();
+        window.scrollTo(privateVars.hscroll,privateVars.vscroll);
+		$(".yui-galleryintrotourui-card").css("display","none");
+        privateVars.prevActiveElement.focus();
+    };
 	$.fn.introTour = function(cardinfo,cardstyle){
+		privateVars.hscroll = (document.all ? document.scrollLeft : window.pageXOffset),
+        privateVars.vscroll = (document.all ? document.scrollTop : window.pageYOffset);
+        privateVars.prevActiveElement = document.activeElement;
 		cardstyle = setcardstyle(cardstyle);
 		generateSlideDom("60px","50%",cardinfo[0],'galleryintrotourui-card-welcome','welcome',0);
 		for(var i=1;i<cardinfo.length;i++){
 			var ci = cardinfo[i],
 			elem = document.getElementById(ci.target),
-			pos;
+			pos,
+			index=i;
 			if(elem){
 				pos = findpos(elem),
 				id='galleryintrotourui-card-'+i;
@@ -143,28 +154,35 @@ IMPORTANT:
 				pos[1] = pos[1]+"px";
 				pos[0] = pos[0]+"px";
 				if(i===cardinfo.length-2){i="end";}
-				generateSlideDom(pos[1],pos[0],ci,id,'',i);
+				generateSlideDom(pos[1],pos[0],ci,id,'',i,index);
 			}
 		}
 		generateSlideDom("60px","50%",cardinfo[cardinfo.length-1],'galleryintrotourui-card-endtour','end',0);
 		window.scrollTo(0,0);
 		$('#galleryintrotourui-card-welcome').css('display','block');
+		$("#yui-galleryintrotourui-buttonwelcome-id").focus();
 		$(".yui-galleryintrotourui-card-next").click(function(){
 			var seqid = this.getAttribute("data-seqid"),
-			carddivid = "";
+			carddivid = "",
+			buttondivid = "";
+            $(this).blur();
 			$(".yui-galleryintrotourui-card").css("display","none");
 			if(seqid === "welcome"){
 				carddivid = "#galleryintrotourui-card-1";
+				buttondivid = "#yui-galleryintrotourui-buttonnav-1";
 			}else if(seqid === "end"){
 				carddivid = "#galleryintrotourui-card-endtour";
+				buttondivid = "#yui-galleryintrotourui-buttontourend-id";
 			}else{
 				seqid++;
 				carddivid = '#galleryintrotourui-card-'+seqid;
+				buttondivid = '#yui-galleryintrotourui-buttonnav-'+seqid;
 			}
 			if(this.getAttribute("id") === "yui-galleryintrotourui-buttontourend-id"){
 				$(".yui-galleryintrotourui-card").css("display","none");
 			}else{
 				$(carddivid).css('display','block');
+				$(buttondivid).focus();
 				if(seqid !== "end"){
 					var toppos = $(carddivid).css('top'),
 					leftpos = $(carddivid).css('left');
@@ -176,15 +194,11 @@ IMPORTANT:
 				}
 			}
 		});
-		$(".yui-galleryintrotourui-card-closebutton").click(function(){
-            window.scrollTo(0,0);
-			$(".yui-galleryintrotourui-card").css("display","none");
-		});
+		$(".yui-galleryintrotourui-card-closebutton").click(closeIntro);
 		$(document).keyup(function(e) {
 		  if(e.keyCode == 27){
-				window.scrollTo(0,0);
-				$(".yui-galleryintrotourui-card").css("display","none");
-			}
+			closeIntro();
+		  }
 		});
 	};
 })(jQuery);

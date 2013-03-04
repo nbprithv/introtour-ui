@@ -12,7 +12,7 @@ YUI().use('gallery-introtour-ui','test', function (Y) {
 				do {
 					curleft += obj.offsetLeft;
 					curtop += obj.offsetTop;
-				} while (obj = obj.offsetParent);
+				} while (obj == obj.offsetParent);
 			}
 		return [curleft,curtop];
 	};
@@ -82,8 +82,39 @@ YUI().use('gallery-introtour-ui','test', function (Y) {
 			Y.Assert.areEqual(3,seqid);
 		},
 		"Left card nav":function(){
-			var seqid = Y.one("#yui-galleryintrotourui-buttonnav-").getAttribute("data-seqid");
+			var seqid = Y.one("#yui-galleryintrotourui-buttonnav-4").getAttribute("data-seqid");
 			Y.Assert.areEqual("end",seqid);
+		},
+		"End card nav":function(){
+			var seqid = Y.one("#yui-galleryintrotourui-buttontourend-id").getAttribute("data-seqid");
+			Y.Assert.areEqual("end",seqid);
+		},
+	});
+	var checkbuttonid = new Y.Test.Case({
+		'name':'Check the buttonids',
+		'Welcome card buttonid':function(){
+			var buttonid = Y.one('#galleryintrotourui-card-welcome button').getAttribute('id');
+			Y.Assert.areEqual("yui-galleryintrotourui-buttonwelcome-id",buttonid);
+		},
+		'Right card buttonid':function(){
+			var buttonid = Y.one('#galleryintrotourui-card-1 button').getAttribute('id');
+			Y.Assert.areEqual("yui-galleryintrotourui-buttonnav-1",buttonid);
+		},
+		'Top card buttonid':function(){
+			var buttonid = Y.one('#galleryintrotourui-card-2 button').getAttribute('id');
+			Y.Assert.areEqual("yui-galleryintrotourui-buttonnav-2",buttonid);
+		},
+		'Bottom card buttonid':function(){
+			var buttonid = Y.one('#galleryintrotourui-card-3 button').getAttribute('id');
+			Y.Assert.areEqual("yui-galleryintrotourui-buttonnav-3",buttonid);
+		},
+		'Left card buttonid':function(){
+			var buttonid = Y.one('#galleryintrotourui-card-4 button').getAttribute('id');
+			Y.Assert.areEqual("yui-galleryintrotourui-buttonnav-4",buttonid);
+		},
+		'End card buttonid':function(){
+			var buttonid = Y.one('#galleryintrotourui-card-endtour button').getAttribute('id');
+			Y.Assert.areEqual("yui-galleryintrotourui-buttontourend-id",buttonid);
 		},
 	});
 
@@ -91,6 +122,7 @@ YUI().use('gallery-introtour-ui','test', function (Y) {
 	var TestRunner = Y.Test.Runner;
 	TestRunner.add(checkpos);
 	TestRunner.add(checknav);
+	TestRunner.add(checkbuttonid);
 	TestRunner.run();
 	
 });
