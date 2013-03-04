@@ -1,10 +1,10 @@
 YUI().use('gallery-introtour-ui','test', function (Y) {
-	var tour_cards = [{'title':'Welcome','position':'pagecenter','content':'Welcome to this feature tour'},
-                {'title':'Get Started','content':'This tells you what to do to get started.','target':'hello1','position':'right','width':'100'},
-                {'title':'Go here next','content':'Next, you should probably try this out.','target':'hello2','position':'top','height':'125'},
-                {'title':'Try this!','content':'This helps you get more information.','target':'hello3','position':'bottom','height':'50'},
-                {'title':'Important!','content':'Finally click here to save changes.','target':'hello4','position':'left','width':'50'},
-                {'title':'That\'s it! You\'re good to go!','position':'pagecenter'}];
+	var tour_cards = [{'title':'Welcome','position':'pagecenter','content':'Welcome to Intro tour plugin.'},
+                {'title':'Get Started','content':'Use this plugin to create a walkthrough like this.','target':'readsummary','position':'right','width':'100'},
+                {'title':'jQuery plugin','content':'Use the jQuery plugin if you prefer.','target':'jquerypluginusage','position':'top','height':'125'},
+                {'title':'YUI3 plugin','content':'Or in YUI3. Whichever you like.','target':'yuipluginusage','position':'bottom','height':'50'},
+                {'title':'YUI3 gallery module','content':'Include it only if you want the source or use directly from CDN','target':'yui3code','position':'left','width':'50'},
+                {'title':'Thank you!','content':'Try it out and will appreciate any feedback.','position':'pagecenter'}];
 	Y.Introtour.init(tour_cards);
 	var findpos = function (obj){
 		var curleft = curtop = 0;
@@ -94,4 +94,3 @@ YUI().use('gallery-introtour-ui','test', function (Y) {
 	TestRunner.run();
 	
 });
-
