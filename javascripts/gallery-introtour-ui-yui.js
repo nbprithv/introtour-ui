@@ -5,32 +5,27 @@ Set up step by step intro tours on your page.
 Usage:
 	YUI().use("gallery-introtour-ui",function(Y){
 		var tour_cards = [{'title':'Welcome','position':'pagecenter','content':},
-							{'title':'Click here to start','divfocus':'#clickhere','position':'right','width':'30'},
-							{'title':'Next click here to cont..','divfocus':'#continue','position':'top',height:'20'},
+							{'title':'Click here to start','target':'#clickhere','position':'right','width':'30'},
+							{'title':'Next click here to cont..','target':'#continue','position':'top',height:'20'},
 							{'title':'That's it!','position':'pagecenter'}];
-		//OPTIONAL: You can style your card's button colors, card border color, title color, button text color, content color.
-		//These are the default values
-		var tour_card_style = {'button':'#61399d','buttontext':'#000','title':'#fff','content':'#fff','cardborder':'#61399d'};
-		var config = {cards:tour_cards,cardstyle:tour_card_style};
-		Y.introtour.init(config);
-		//Start the tour.
-		Y.introtour.start();
+		Y.Introtour.init(tour_cards);
 	});
 
 IMPORTANT:
 1. The div ID you pass cannot be hidden at the time of calling the init function.
-2. The div ID you pass needs to have a parent which has position:relative.
+2. The div ID you pass needs to have an ancestor which has position:relative.
 */
 /*******************************************/
 YUI.add('gallery-introtour-ui', function(Y) {
 	Y.namespace('Introtour');
 	var findpos = function (obj){
-		var curleft = curtop = 0;
+		var curleft =0,
+		curtop = 0;
 			if (obj.offsetParent) {
 				do {
 					curleft += obj.offsetLeft;
 					curtop += obj.offsetTop;
-				} while (obj = obj.offsetParent);
+				} while (obj == obj.offsetParent);
 			}
 		return [curleft,curtop];
 	},
@@ -75,10 +70,9 @@ YUI.add('gallery-introtour-ui', function(Y) {
 							"<div class='yui-galleryintrotourui-card-content'>"+ci.content+"</div>"+
 						"</div>"+
 						"<div class='yui-galleryintrotourui-card-nav'>"+
-							"<div data-seqid='"+seqid+"' id='"+buttonid+"' class='yui-galleryintrotourui-card-next yui3-button notice'>"+button.content+"</div>"+
+							"<button data-seqid='"+seqid+"' id='"+buttonid+"' class='yui-galleryintrotourui-card-next yui3-button notice'>"+button.content+"</button>"+
 						"</div>"+
 					"</div>";
-
 		return html;
 	},
 	generateSlideDom = function(toppos,leftpos,ci,id,type,seqid){
@@ -144,7 +138,7 @@ YUI.add('gallery-introtour-ui', function(Y) {
 		generateSlideDom("60px","50%",cardinfo[0],'galleryintrotourui-card-welcome','welcome',0);
 		for(var i=1;i<cardinfo.length;i++){
 			var ci = cardinfo[i],
-			elem = document.getElementById(ci.divfocus),
+			elem = document.getElementById(ci.target),
 			pos;
 			if(elem){
 				pos = findpos(elem),
@@ -187,7 +181,12 @@ YUI.add('gallery-introtour-ui', function(Y) {
 			}
 		},".yui-galleryintrotourui-card-next");
 		Y.on("click",function(){
+			window.scrollTo(0,0);
 			Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
 		},".yui-galleryintrotourui-card-closebutton");
+		Y.one('body').on('key', function() {
+			window.scrollTo(0,0);
+			Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
+		},'esc');
 	};
-}, '0.1.1',{requires: ['node']});
+}, '0.1.1',{requires: ['node','event-key']});
