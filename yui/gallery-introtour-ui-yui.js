@@ -1,7 +1,7 @@
 /*******************************************/
 /*
-YUI Gallery Intro Tour module
-Set up step by step intro tours on your page.
+YUI Gallery Feature Walkthrough module
+Set up step by step feature walkthrough on your page.
 Usage:
 	YUI().use("gallery-introtour-ui",function(Y){
 		var tour_cards = [{'title':'Welcome','position':'pagecenter','content':},
