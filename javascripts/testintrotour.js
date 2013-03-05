@@ -3,7 +3,7 @@ YUI().use('gallery-introtour-ui','test', function (Y) {
                 {'title':'Get Started','content':'Create a walkthrough like this, with this plugin.','target':'readsummary','position':'right','width':'100'},
                 {'title':'jQuery plugin','content':'Use the jQuery plugin if you prefer.','target':'jquerypluginusage','position':'top','height':'125'},
                 {'title':'YUI3 plugin','content':'Or in YUI3. Whichever you like.','target':'yuipluginusage','position':'bottom','height':'50'},
-                {'title':'YUI3 gallery module','content':'Include it only if you want the source or use directly from CDN','target':'yui3code','position':'left','width':'50'},
+                {'title':'Upcoming','content':'Check back here for updates on upcoming features.','target':'upcomingfeatures','position':'left','width':'50'},
                 {'title':'Thank you!','content':'Try it out and will appreciate any feedback.','position':'pagecenter'}];
 	Y.Introtour.init(tour_cards);
 	var findpos = function (obj){
