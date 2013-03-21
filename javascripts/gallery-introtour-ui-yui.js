@@ -65,13 +65,13 @@ YUI.add('gallery-introtour-ui', function(Y) {
 		else if(ci.position === "bottom"){arrowclass="bottom";}
 		if(arrowclass){html = "<div class='yui-galleryintrotourui-card-arrow "+arrowclass+"'></div>";}
 		html += "<div class='yui-galleryintrotourui-card-container'>"+
-						"<div class='yui-galleryintrotourui-card-closebutton'>x</div><div class='yui-galleryintrotourui-clearfix'></div>"+
+						"<div class='yui-galleryintrotourui-card-closebutton' tabindex='2'>x</div><div class='yui-galleryintrotourui-clearfix'></div>"+
 						"<div class='yui-galleryintrotourui-card-text'>"+
 							"<div class='yui-galleyintroui-card-title'>"+ci.title+"</div>"+
 							"<div class='yui-galleryintrotourui-card-content'>"+ci.content+"</div>"+
 						"</div>"+
 						"<div class='yui-galleryintrotourui-card-nav'>"+
-							"<button data-seqid='"+seqid+"' id='"+buttonid+"' class='yui-galleryintrotourui-card-next yui3-button notice'>"+button.content+"</button>"+
+							"<button data-seqid='"+seqid+"' tabindex='1' id='"+buttonid+"' class='yui-galleryintrotourui-card-next yui3-button notice'>"+button.content+"</button>"+
 						"</div>"+
 					"</div>";
 		return html;
