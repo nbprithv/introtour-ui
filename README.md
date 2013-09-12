@@ -59,5 +59,6 @@ YUI().use('gallery-introtour-ui','test', function (Y) {
                 {'title':'Important!','content':'Finally click here to save changes.','target':'hello4','position':'left','width':'50'},
                 {'title':'That\'s it! You\'re good to go!','position':'pagecenter'}];
     Y.Introtour.init(tour_cards);
+});
 </script>
 ```
