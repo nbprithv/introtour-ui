@@ -14,7 +14,24 @@ IMPORTANT:
 */
 /*******************************************/
 (function($){
+ //Poly fill CustomEvent for IE 9 and IE 10
+  if(typeof(CustomEvent) !== 'function'){
+    (function () {
+      function CustomEvent ( event, params ) {
+        params = params || { bubbles: false, cancelable: false, detail: undefined };
+        var evt = document.createEvent( 'CustomEvent' );
+        evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+        return evt;
+       };
+      CustomEvent.prototype = window.CustomEvent.prototype;
+
+      window.CustomEvent = CustomEvent;
+    })();
+  }
+
 	var privateVars={},
+  introTourClosed = new CustomEvent("introTourClosed"),
+  introTourLastCard = new CustomEvent('introTourLastCard'),
 	findpos = function (obj){
 		var curleft = curtop = 0;
 			if (obj.offsetParent) {
@@ -131,15 +148,16 @@ IMPORTANT:
 		return pos;
 	},
 	closeIntro = function(){
-        document.activeElement.blur();
-        window.scrollTo(privateVars.hscroll,privateVars.vscroll);
+    document.activeElement.blur();
+    window.scrollTo(privateVars.hscroll,privateVars.vscroll);
 		$(".yui-galleryintrotourui-card").css("display","none");
-        privateVars.prevActiveElement.focus();
-    };
+    privateVars.prevActiveElement.focus();
+    document.dispatchEvent(introTourClosed);
+  };
 	$.fn.introTour = function(cardinfo,cardstyle){
 		privateVars.hscroll = (document.all ? document.scrollLeft : window.pageXOffset),
-        privateVars.vscroll = (document.all ? document.scrollTop : window.pageYOffset);
-        privateVars.prevActiveElement = document.activeElement;
+    privateVars.vscroll = (document.all ? document.scrollTop : window.pageYOffset);
+    privateVars.prevActiveElement = document.activeElement;
 		cardstyle = setcardstyle(cardstyle);
 		generateSlideDom("60px","50%",cardinfo[0],'galleryintrotourui-card-welcome','welcome',0);
 		for(var i=1;i<cardinfo.length;i++){
@@ -179,7 +197,8 @@ IMPORTANT:
 				buttondivid = '#yui-galleryintrotourui-buttonnav-'+seqid;
 			}
 			if(this.getAttribute("id") === "yui-galleryintrotourui-buttontourend-id"){
-				$(".yui-galleryintrotourui-card").css("display","none");
+//				$(".yui-galleryintrotourui-card").css("display","none");
+        closeIntro();
 			}else{
 				$(carddivid).css('display','block');
 				$(buttondivid).focus();
@@ -190,6 +209,7 @@ IMPORTANT:
 					leftpos = leftpos.split("px");
 					window.scrollTo(leftpos[0],toppos[0]);
 				}else{
+          document.dispatchEvent(introTourLastCard);
 					window.scrollTo(0,0);
 				}
 			}

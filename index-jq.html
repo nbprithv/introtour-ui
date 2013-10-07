@@ -22,6 +22,12 @@
                 {'title':'Important!','content':'Finally click here to save changes.','target':'hello4','position':'left','width':'50'},
                 {'title':'That\'s it! You\'re good to go!','position':'pagecenter'}];
 			$().introTour(tour_cards);	
+      document.addEventListener('introTourClosed', function(e){
+        console.log('closed cards');
+      });
+      document.addEventListener('introTourLastCard', function(e){
+        console.log('last card');
+      });
 			});
 			
 		</script>
