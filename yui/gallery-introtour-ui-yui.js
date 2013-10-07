@@ -18,7 +18,24 @@ IMPORTANT:
 /*******************************************/
 YUI.add('gallery-introtour-ui', function(Y) {
 	Y.namespace('Introtour');
+  
+  if(typeof(CustomEvent) !== 'function'){
+    (function () {
+      function CustomEvent ( event, params ) {
+        params = params || { bubbles: false, cancelable: false, detail: undefined };
+        var evt = document.createEvent( 'CustomEvent' );
+        evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+        return evt;
+       };
+      CustomEvent.prototype = window.CustomEvent.prototype;
+
+      window.CustomEvent = CustomEvent;
+    })();
+  }
+
 	var privateVars={},
+  introTourClosed = new CustomEvent("introTourClosed"),
+  introTourLastCard = new CustomEvent('introTourLastCard'),
 	findpos = function (obj){
 		var curleft =0,
 		curtop = 0;
@@ -139,6 +156,7 @@ YUI.add('gallery-introtour-ui', function(Y) {
 		window.scrollTo(privateVars.hscroll,privateVars.vscroll);
 		Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
 		privateVars.prevActiveElement.focus();
+    document.dispatchEvent(introTourClosed);
 	};
 	Y.Introtour.init = function(cardinfo,cardstyle){
 		privateVars.hscroll = (document.all ? document.scrollLeft : window.pageXOffset),
@@ -184,7 +202,8 @@ YUI.add('gallery-introtour-ui', function(Y) {
 				buttondivid = '#yui-galleryintrotourui-buttonnav-'+seqid;
 			}
 			if(this.getAttribute("id") === "yui-galleryintrotourui-buttontourend-id"){
-				Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
+				//Y.all(".yui-galleryintrotourui-card").setStyle("display","none");
+        closeIntro();
 			}else{
 				Y.one(carddivid).setStyle('display','block');
 				Y.one(buttondivid).focus();
@@ -195,6 +214,7 @@ YUI.add('gallery-introtour-ui', function(Y) {
 					leftpos = leftpos.split("px");
 					window.scrollTo(leftpos[0],toppos[0]);
 				}else{
+          document.dispatchEvent(introTourLastCard);
 					window.scrollTo(0,0);
 				}
 			}

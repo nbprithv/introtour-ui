@@ -14,5 +14,13 @@
 		<script src="http://yui.yahooapis.com/3.8.1/build/yui/yui-min.js"></script>
 		<script src="yui/gallery-introtour-ui-yui.js"></script>
 		<script type="text/javascript" src="yui/testintrotour.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('introTourClosed', function(e){
+        console.log('closed cards');
+      });
+      document.addEventListener('introTourLastCard', function(e){
+        console.log('last card');
+      });
+    </script>
 	</body>
 </html>
