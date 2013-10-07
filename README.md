@@ -63,9 +63,9 @@ YUI().use('gallery-introtour-ui','test', function (Y) {
 </script>
 ```
 
-Events usage
+Events
 ------------
-There are two events you can listen for.
+There are two events you can subscribe to.
 
 - introTourClosed : is triggered when any card is closed, including the last card
 - introTourLastCard : is triggered when the last card is displayed
